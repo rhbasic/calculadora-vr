@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Ponto R09</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Syne+Mono&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#0f0f0f;
+  --surface:#161616;
+  --surface2:#1e1e1e;
+  --border:#2a2a2a;
+  --border2:#333;
+  --text:#f0ede8;
+  --muted:#666;
+  --muted2:#444;
+  --accent:#c8f060;
+  --accent-dim:#8aab2e;
+  --red:#ff4d4d;
+  --red-bg:#1a0a0a;
+  --amber:#ffb347;
+  --amber-bg:#1a1000;
+  --green:#c8f060;
+  --green-bg:#0d1a00;
+  --purple:#b39ddb;
+  --purple-bg:#120d1a;
+  --blue:#64b5f6;
+}
+
+body{
+  font-family:'Syne',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding:48px 16px;
+}
+
+.container{width:100%;max-width:760px}
+
+/* HEADER */
+.header{margin-bottom:40px}
+.header-eyebrow{
+  font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:10px;display:flex;align-items:center;gap:8px
+}
+.header-eyebrow::before{content:'';display:block;width:20px;height:1px;background:var(--accent)}
+.header h1{font-size:clamp(28px,5vw,42px);font-weight:700;line-height:1.1;letter-spacing:-.02em}
+.header p{font-size:14px;color:var(--muted);margin-top:8px;line-height:1.6}
+
+/* UPLOAD */
+.drop-zone{
+  border:1px solid var(--border2);
+  border-radius:4px;
+  padding:40px 24px;
+  text-align:center;
+  cursor:pointer;
+  transition:all .2s;
+  background:var(--surface);
+  position:relative;
+  margin-bottom:24px;
+}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--accent);background:var(--surface2)}
+.drop-zone.has-file{border-color:var(--accent);background:var(--green-bg)}
+.drop-zone input{display:none}
+.drop-icon{font-size:32px;margin-bottom:12px;display:block;filter:grayscale(1);opacity:.5;transition:all .2s}
+.drop-zone:hover .drop-icon,.drop-zone.has-file .drop-icon{filter:none;opacity:1}
+.drop-title{font-size:15px;font-weight:600;margin-bottom:4px}
+.drop-sub{font-size:12px;color:var(--muted)}
+.drop-file{margin-top:10px;font-size:13px;color:var(--accent);font-weight:500}
+
+/* PROGRESS */
+.progress-wrap{display:none;margin-bottom:24px}
+.progress-label{font-size:12px;color:var(--muted);margin-bottom:8px;display:flex;justify-content:space-between}
+.progress-bar-bg{height:2px;background:var(--border2);border-radius:1px;overflow:hidden}
+.progress-bar{height:100%;background:var(--accent);border-radius:1px;transition:width .3s;width:0%}
+
+/* ERROR */
+.error-box{
+  background:var(--red-bg);border:1px solid #3a1010;border-radius:4px;
+  padding:12px 16px;font-size:13px;color:var(--red);margin-bottom:20px;display:none
+}
+
+/* BUTTON */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;border-radius:4px;
+  font-family:'Syne',sans-serif;font-size:13px;font-weight:600;
+  cursor:pointer;transition:all .15s;border:none;letter-spacing:.02em;
+}
+.btn-accent{background:var(--accent);color:#0f0f0f}
+.btn-accent:hover{background:#d4f570}
+.btn-accent:active{transform:scale(.98)}
+.btn-ghost{background:transparent;border:1px solid var(--border2);color:var(--text)}
+.btn-ghost:hover{border-color:var(--border);background:var(--surface2)}
+.btn:disabled{opacity:.3;cursor:not-allowed}
+
+/* RESULTS */
+.results{display:none}
+
+.results-header{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  gap:12px;margin-bottom:28px;flex-wrap:wrap;
+}
+.results-title{font-size:11px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.results-period{font-size:20px;font-weight:700}
+
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start}
+
+/* STATS */
+.stats{
+  display:grid;grid-template-columns:repeat(6,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);
+  border-radius:4px;overflow:hidden;margin-bottom:24px;
+}
+.stat{background:var(--surface);padding:16px 12px;text-align:center}
+.stat-n{font-size:26px;font-weight:700;font-family:'Syne Mono',monospace;line-height:1}
+.stat-l{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.stat-n.c-red{color:var(--red)}
+.stat-n.c-amber{color:var(--amber)}
+.stat-n.c-green{color:var(--green)}
+.stat-n.c-blue{color:var(--blue)}
+.stat-n.c-purple{color:var(--purple)}
+
+/* FILTERS */
+.filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.filters input,.filters select{
+  background:var(--surface);border:1px solid var(--border2);border-radius:4px;
+  padding:8px 12px;font-family:'Syne',sans-serif;font-size:12px;color:var(--text);
+  transition:border-color .15s;
+}
+.filters input{flex:1;min-width:160px}
+.filters input:focus,.filters select:focus{outline:none;border-color:var(--accent)}
+.filters select option{background:var(--surface2)}
+.count-tag{
+  font-size:11px;color:var(--muted);margin-left:auto;
+  background:var(--surface);border:1px solid var(--border);
+  padding:4px 10px;border-radius:20px;white-space:nowrap;
+}
+
+/* TABLE */
+.table-wrap{
+  border:1px solid var(--border);border-radius:4px;overflow:hidden;
+}
+table{width:100%;border-collapse:collapse;font-size:12px;table-layout:fixed}
+thead{background:var(--surface2)}
+th{
+  padding:10px 12px;text-align:left;
+  font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;
+}
+td{padding:9px 12px;border-bottom:1px solid var(--border2);vertical-align:middle;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:var(--surface2)}
+
+.col-nome{width:30%}
+.col-n{width:7%;text-align:right}
+.col-bh{width:9%;text-align:right;font-family:'Syne Mono',monospace}
+.col-st{width:17%}
+
+/* Row highlight */
+.row-falta td{background:#150505}
+.row-falta:hover td{background:#1a0808 !important}
+.row-atestado td{background:#12100a}
+.row-atestado:hover td{background:#16140c !important}
+.row-folga td{background:#0e0b14}
+.row-folga:hover td{background:#12101a !important}
+
+/* Badges */
+.badge{
+  display:inline-flex;align-items:center;gap:3px;
+  padding:2px 7px;border-radius:2px;font-size:10px;font-weight:600;letter-spacing:.03em;
+  white-space:nowrap;
+}
+.b-green{background:var(--green-bg);color:var(--green);border:1px solid #2a4000}
+.b-red{background:var(--red-bg);color:var(--red);border:1px solid #3a1010}
+.b-amber{background:var(--amber-bg);color:var(--amber);border:1px solid #3a2500}
+.b-purple{background:var(--purple-bg);color:var(--purple);border:1px solid #2a1a40}
+.b-gray{background:#111;color:var(--muted);border:1px solid var(--border)}
+
+/* Numbers */
+.n-red{color:var(--red);font-weight:600}
+.n-amber{color:var(--amber);font-weight:600}
+.n-green{color:var(--green)}
+.n-dim{color:var(--muted2)}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:32px 0}
+
+/* FOOTER */
+.footer{margin-top:40px;font-size:11px;color:var(--muted2);display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px}
+.footer span{display:flex;align-items:center;gap:6px}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="header">
+    <div class="header-eyebrow">Controle de Frequência</div>
+    <h1>Calculadora<br>de Ponto R09</h1>
+    <p>Importe o relatório R09 exportado do sistema de ponto.<br>O resumo é gerado automaticamente — pronto para baixar.</p>
+  </div>
+
+  <div class="drop-zone" id="dz">
+    <input type="file" id="fi" accept=".xlsx,.xls">
+    <span class="drop-icon">📊</span>
+    <div class="drop-title">Arraste o arquivo R09 aqui</div>
+    <div class="drop-sub">.xlsx ou .xls exportado do sistema</div>
+    <div class="drop-file" id="fname"></div>
+  </div>
+
+  <div class="progress-wrap" id="prog-wrap">
+    <div class="progress-label"><span id="prog-msg">Processando...</span><span id="prog-pct">0%</span></div>
+    <div class="progress-bar-bg"><div class="progress-bar" id="prog-bar"></div></div>
+  </div>
+
+  <div class="error-box" id="err-box"></div>
+
+  <div id="proc-actions" style="display:none;margin-bottom:24px">
+    <button class="btn btn-accent" id="proc-btn">Processar arquivo →</button>
+  </div>
+
+  <div class="results" id="results">
+
+    <div class="results-header">
+      <div>
+        <div class="results-title">Relatório processado</div>
+        <div class="results-period" id="res-period">—</div>
+      </div>
+      <div class="actions">
+        <button class="btn btn-ghost" id="reset-btn">↺ Novo arquivo</button>
+        <button class="btn btn-accent" id="dl-btn">↓ Baixar Excel</button>
+      </div>
+    </div>
+
+    <div class="stats" id="stats"></div>
+
+    <div class="filters">
+      <input type="text" id="srch" placeholder="Buscar colaborador...">
+      <select id="st-fil">
+        <option value="">Todos os status</option>
+        <option value="✅">✅ Regular</option>
+        <option value="⛔">⛔ Falta</option>
+        <option value="⚠">⚠ Atestado</option>
+        <option value="🟣">🟣 Trab. folga</option>
+        <option value="🔸">🔸 Dia curto</option>
+        <option value="⬜">⬜ Sem registro</option>
+      </select>
+      <select id="sort-fil">
+        <option value="nome">Nome A–Z</option>
+        <option value="faltas">Mais faltas</option>
+        <option value="atestados">Mais atestados</option>
+        <option value="bh">Banco horas</option>
+        <option value="dias">Mais dias</option>
+      </select>
+      <span class="count-tag" id="cnt">0</span>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th class="col-nome">Colaborador</th>
+          <th class="col-n" style="text-align:right">Atest.</th>
+          <th class="col-n" style="text-align:right">Faltas</th>
+          <th class="col-bh" style="text-align:right">B.Horas</th>
+          <th class="col-n" style="text-align:right">Dias</th>
+          <th class="col-n" style="text-align:right">&lt;4h10</th>
+          <th class="col-n" style="text-align:right">Folga</th>
+          <th class="col-st">Status</th>
+        </tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="divider"></div>
+    <div class="footer">
+      <span><span class="dot"></span>Processado localmente — nenhum dado enviado a servidores</span>
+      <span id="footer-info"></span>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<script>
+var allRows=[], wbSrc=null, pendingFile=null;
+
+var dz=document.getElementById('dz'),fi=document.getElementById('fi');
+dz.addEventListener('click',()=>fi.click());
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
+dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('drag');if(e.dataTransfer.files[0])setFile(e.dataTransfer.files[0])});
+fi.addEventListener('change',()=>{if(fi.files[0])setFile(fi.files[0])});
+
+function setFile(f){
+  var ext=f.name.split('.').pop().toLowerCase();
+  if(!['xlsx','xls'].includes(ext)){showErr('Use um arquivo .xlsx ou .xls exportado do sistema de ponto.');return}
+  showErr('');
+  pendingFile=f;
+  dz.classList.add('has-file');
+  document.getElementById('fname').textContent='✓ '+f.name;
+  document.getElementById('proc-actions').style.display='block';
+  document.getElementById('proc-btn').onclick=()=>processFile(f);
+}
+
+function showErr(msg){
+  var b=document.getElementById('err-box');
+  b.textContent=msg;b.style.display=msg?'block':'none';
+}
+
+function setProgress(pct,msg){
+  document.getElementById('prog-bar').style.width=pct+'%';
+  document.getElementById('prog-pct').textContent=pct+'%';
+  if(msg)document.getElementById('prog-msg').textContent=msg;
+}
+
+function tMin(t){if(!t)return 0;var m=(t+'').match(/^(\d+):(\d+)/);return m?+m[1]*60+ +m[2]:0}
+function fTime(m){return Math.floor(m/60).toString().padStart(2,'0')+':'+Math.round(m%60).toString().padStart(2,'0')}
+
+function processFile(f){
+  document.getElementById('proc-actions').style.display='none';
+  document.getElementById('prog-wrap').style.display='block';
+  setProgress(10,'Lendo arquivo...');
+  var reader=new FileReader();
+  reader.onload=function(e){
+    try{
+      setProgress(30,'Interpretando planilha...');
+      var wb=XLSX.read(new Uint8Array(e.target.result),{type:'array',cellDates:false});
+      var ws=wb.Sheets[wb.SheetNames[0]];
+      var rows=XLSX.utils.sheet_to_json(ws,{defval:''});
+      if(!rows.length)throw new Error('Planilha vazia ou formato inválido.');
+      var keys=Object.keys(rows[0]);
+      var K={
+        nome:keys.find(k=>/^nome$/i.test(k)),
+        entrada:keys.find(k=>/^entrada$/i.test(k)),
+        dur:keys.find(k=>/^dura/i.test(k)),
+        rotina:keys.find(k=>/rotina/i.test(k)),
+        obs:keys.find(k=>/^obs$/i.test(k)),
+        he:keys.find(k=>/^hora extra$/i.test(k)),
+        dia:keys.find(k=>/^dia$/i.test(k))
+      };
+      if(!K.nome)throw new Error('Coluna "Nome" não encontrada. Confirme que é o arquivo R09.');
+      setProgress(55,'Calculando indicadores...');
+      var pessoas={};
+      rows.forEach(function(r){
+        var nome=(r[K.nome]||'').toString().trim();if(!nome)return;
+        if(!pessoas[nome])pessoas[nome]={nome,atestados:0,faltas:0,heMin:0,diasTrab:0,diasCurtos:0,trabFolga:0,compBanco:0};
+        var p=pessoas[nome];
+        var entrada=(r[K.entrada]||'').toString().trim();
+        var rotina=(r[K.rotina]||'').toString().trim().toLowerCase();
+        var obs=(r[K.obs]||'').toString();
+        var dur=(r[K.dur]||'').toString().trim();
+        var he=(r[K.he]||'').toString().trim();
+        var semJ=['folga','sem jornada','dispensa'].includes(rotina)||!rotina;
+        var justif=/atestado|feriado|banco|licen|suspens|declar/i.test(obs);
+        if(/atestado/i.test(obs))p.atestados++;
+        if(entrada===''){if(!semJ&&!justif)p.faltas++}
+        else{
+          p.diasTrab++;
+          var dm=tMin(dur);if(dm>0&&dm<250)p.diasCurtos++;
+          if(rotina==='folga'||rotina==='sem jornada')p.trabFolga++;
+        }
+        if(/banco/i.test(obs))p.compBanco++;
+        p.heMin+=tMin(he);
+      });
+      setProgress(80,'Finalizando...');
+      allRows=Object.values(pessoas).sort((a,b)=>a.nome.localeCompare(b.nome));
+      allRows.forEach(function(p){
+        p.bh=fTime(p.heMin);
+        p.status=p.faltas>0?'⛔ Tem falta':p.atestados>0?'⚠ Tem atestado':p.trabFolga>0?'🟣 Trab. em folga':p.diasCurtos>0?'🔸 Dia curto':p.diasTrab===0?'⬜ Sem registros':'✅ Regular';
+      });
+      wbSrc={rows:allRows,source:rows,K,filename:f.name};
+      // period
+      var dias=rows.map(r=>(r[K.dia]||'').toString()).filter(Boolean);
+      document.getElementById('res-period').textContent=f.name.replace(/\.[^.]+$/,'');
+      document.getElementById('footer-info').textContent=rows.length+' registros · '+allRows.length+' colaboradores';
+      // stats
+      var tf=allRows.reduce((s,p)=>s+p.faltas,0),ta=allRows.reduce((s,p)=>s+p.atestados,0),td=allRows.reduce((s,p)=>s+p.diasTrab,0),reg=allRows.filter(p=>p.status.includes('✅')).length;
+      document.getElementById('stats').innerHTML=
+        st(allRows.length,'Colab.','c-blue')+st(reg,'Regulares','c-green')+st(tf,'Faltas','c-red')+st(ta,'Atestados','c-amber')+st(allRows.filter(p=>p.trabFolga>0).length,'Em folga','c-purple')+st(allRows.filter(p=>p.diasCurtos>0).length,'Dia curto','');
+      setProgress(100,'');
+      setTimeout(function(){
+        document.getElementById('prog-wrap').style.display='none';
+        document.getElementById('results').style.display='block';
+        renderTable(allRows);
+      },300);
+    }catch(err){
+      document.getElementById('prog-wrap').style.display='none';
+      document.getElementById('proc-actions').style.display='block';
+      showErr('Erro: '+err.message);
+    }
+  };
+  reader.readAsArrayBuffer(f);
+}
+
+function st(val,label,cls){
+  return'<div class="stat"><div class="stat-n '+cls+'">'+val+'</div><div class="stat-l">'+label+'</div></div>';
+}
+
+function badge(s){
+  if(s.includes('✅'))return'<span class="badge b-green">'+s+'</span>';
+  if(s.includes('⛔'))return'<span class="badge b-red">'+s+'</span>';
+  if(s.includes('⚠'))return'<span class="badge b-amber">'+s+'</span>';
+  if(s.includes('🟣'))return'<span class="badge b-purple">'+s+'</span>';
+  if(s.includes('🔸'))return'<span class="badge b-amber">'+s+'</span>';
+  return'<span class="badge b-gray">'+s+'</span>';
+}
+
+function rowCls(p){return p.faltas>0?'row-falta':p.atestados>0?'row-atestado':p.trabFolga>0?'row-folga':''}
+
+function nc(v,w,d){
+  if(v===0)return'<td class="col-n n-dim" style="text-align:right">—</td>';
+  return'<td class="col-n '+(v>=d?'n-red':v>=w?'n-amber':'n-green')+'" style="text-align:right">'+v+'</td>';
+}
+
+function renderTable(data){
+  document.getElementById('cnt').textContent=data.length+' colab.';
+  document.getElementById('tbody').innerHTML=data.map(function(p){
+    return'<tr class="'+rowCls(p)+'">'+
+      '<td class="col-nome" style="font-weight:600;font-size:11px;letter-spacing:.01em">'+p.nome+'</td>'+
+      nc(p.atestados,1,5)+nc(p.faltas,1,3)+
+      '<td class="col-bh" style="text-align:right;color:'+(p.heMin>0?'var(--green)':'var(--muted2)')+'">'+p.bh+'</td>'+
+      '<td class="col-n" style="text-align:right;color:'+(p.diasTrab>0?'var(--text)':'var(--muted2)')+'">'+p.diasTrab+'</td>'+
+      nc(p.diasCurtos,1,3)+nc(p.trabFolga,1,3)+
+      '<td class="col-st">'+badge(p.status)+'</td></tr>';
+  }).join('');
+}
+
+function applyFilters(){
+  var q=document.getElementById('srch').value.toLowerCase();
+  var st=document.getElementById('st-fil').value;
+  var so=document.getElementById('sort-fil').value;
+  var d=allRows.filter(p=>(!q||p.nome.toLowerCase().includes(q))&&(!st||p.status.startsWith(st)));
+  if(so==='faltas')d=[...d].sort((a,b)=>b.faltas-a.faltas);
+  else if(so==='atestados')d=[...d].sort((a,b)=>b.atestados-a.atestados);
+  else if(so==='bh')d=[...d].sort((a,b)=>b.heMin-a.heMin);
+  else if(so==='dias')d=[...d].sort((a,b)=>b.diasTrab-a.diasTrab);
+  else d=[...d].sort((a,b)=>a.nome.localeCompare(b.nome));
+  renderTable(d);
+}
+document.getElementById('srch').addEventListener('input',applyFilters);
+document.getElementById('st-fil').addEventListener('change',applyFilters);
+document.getElementById('sort-fil').addEventListener('change',applyFilters);
+
+document.getElementById('reset-btn').addEventListener('click',function(){
+  allRows=[];wbSrc=null;pendingFile=null;
+  dz.classList.remove('has-file');
+  document.getElementById('fname').textContent='';
+  document.getElementById('fi').value='';
+  document.getElementById('proc-actions').style.display='none';
+  document.getElementById('results').style.display='none';
+  showErr('');
+});
+
+document.getElementById('dl-btn').addEventListener('click',function(){
+  if(!wbSrc)return;
+  var wb=XLSX.utils.book_new();
+  var hdr=['Nome','Atestados','Faltas','Banco de Horas','Dias Trabalhados','Dias < 4h10','Trab. em Folga','Falta comp. Banco','Status'];
+  var data=[hdr].concat(wbSrc.rows.map(p=>[p.nome,p.atestados,p.faltas,p.bh,p.diasTrab,p.diasCurtos,p.trabFolga,p.compBanco,p.status]));
+  var ws=XLSX.utils.aoa_to_sheet(data);
+  ws['!cols']=[{wch:44},{wch:11},{wch:8},{wch:14},{wch:14},{wch:12},{wch:14},{wch:16},{wch:22}];
+  XLSX.utils.book_append_sheet(wb,ws,'RESUMO');
+  var dkeys=Object.keys(wbSrc.source[0]||{});
+  XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet([dkeys].concat(wbSrc.source.map(r=>dkeys.map(k=>r[k])))),'DADOS');
+  XLSX.writeFile(wb,'ponto_'+new Date().toISOString().slice(0,10)+'.xlsx');
+});
+</script>
+</body>
+</html>
