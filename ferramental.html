@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ferramental · Basic Telecom</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#F5F5F2;color:#1a1a18;}
+.app{display:flex;height:100vh;min-height:600px;}
+.sidebar{width:220px;flex-shrink:0;background:#fff;border-right:0.5px solid #e0dfd8;display:flex;flex-direction:column;padding:1rem 0;}
+.logo{padding:0 1.25rem 1rem;border-bottom:0.5px solid #e0dfd8;margin-bottom:0.75rem;}
+.logo-title{font-size:15px;font-weight:500;color:#1a1a18;}
+.logo-sub{font-size:11px;color:#888780;margin-top:2px;}
+.nav-section{padding:0.5rem 0.75rem 0.25rem;font-size:10px;font-weight:500;color:#b4b2a9;letter-spacing:.08em;text-transform:uppercase;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:.5rem 1.25rem;font-size:13px;color:#5f5e5a;cursor:pointer;transition:background .1s;}
+.nav-item:hover{background:#f5f5f2;color:#1a1a18;}
+.nav-item.active{background:#f5f5f2;color:#1a1a18;font-weight:500;border-left:2px solid #534AB7;}
+.nav-item i{font-size:16px;}
+.main{flex:1;overflow-y:auto;padding:1.5rem;}
+.page{display:none;}
+.page.active{display:block;}
+.page-header{margin-bottom:1.5rem;}
+.page-title{font-size:18px;font-weight:500;color:#1a1a18;}
+.page-sub{font-size:13px;color:#888780;margin-top:4px;}
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.5rem;}
+.metric{background:#f5f5f2;border-radius:8px;padding:1rem;}
+.metric-label{font-size:12px;color:#888780;margin-bottom:6px;}
+.metric-value{font-size:22px;font-weight:500;color:#1a1a18;}
+.metric-sub{font-size:11px;color:#b4b2a9;margin-top:3px;}
+.card{background:#fff;border:0.5px solid #e0dfd8;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1rem;}
+.card-title{font-size:14px;font-weight:500;color:#1a1a18;margin-bottom:1rem;}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{text-align:left;padding:8px 12px;font-size:11px;font-weight:500;color:#b4b2a9;border-bottom:0.5px solid #e0dfd8;text-transform:uppercase;letter-spacing:.06em;}
+td{padding:10px 12px;border-bottom:0.5px solid #e0dfd8;color:#1a1a18;vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:#fafaf8;}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:500;padding:3px 8px;border-radius:20px;}
+.badge-green{background:#EAF3DE;color:#3B6D11;}
+.badge-amber{background:#FAEEDA;color:#854F0B;}
+.badge-red{background:#FCEBEB;color:#A32D2D;}
+.badge-purple{background:#EEEDFE;color:#534AB7;}
+.badge-blue{background:#E6F1FB;color:#185FA5;}
+.badge-gray{background:#F1EFE8;color:#5F5E5A;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;font-size:13px;font-weight:500;border:0.5px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;cursor:pointer;transition:background .1s;}
+.btn:hover{background:#f5f5f2;}
+.btn-primary{background:#534AB7;color:#EEEDFE;border-color:#534AB7;}
+.btn-primary:hover{background:#3C3489;}
+.btn-sm{padding:4px 10px;font-size:12px;}
+.btn-danger{background:#FCEBEB;color:#A32D2D;border-color:#f09595;}
+.btn-danger:hover{background:#f7c1c1;}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.row-between{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.flow-steps{display:flex;align-items:flex-start;gap:0;margin:1rem 0;}
+.flow-step{flex:1;text-align:center;position:relative;}
+.flow-step::after{content:'';position:absolute;top:18px;left:50%;width:100%;height:1px;background:#d3d1c7;z-index:0;}
+.flow-step:last-child::after{display:none;}
+.step-circle{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:16px;position:relative;z-index:1;}
+.step-done{background:#EAF3DE;color:#3B6D11;}
+.step-active{background:#EEEDFE;color:#534AB7;border:2px solid #534AB7;}
+.step-pending{background:#f5f5f2;color:#888780;border:0.5px solid #e0dfd8;}
+.step-label{font-size:11px;color:#888780;line-height:1.3;}
+.step-label strong{display:block;font-size:12px;color:#1a1a18;font-weight:500;}
+.input-field{width:100%;padding:8px 12px;font-size:13px;border:0.5px solid #d3d1c7;border-radius:8px;background:#fff;color:#1a1a18;margin-bottom:12px;outline:none;}
+.input-field:focus{border-color:#534AB7;}
+select.input-field{cursor:pointer;}
+.form-label{font-size:12px;font-weight:500;color:#5f5e5a;margin-bottom:4px;display:block;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.alert{padding:10px 14px;border-radius:8px;font-size:13px;margin-bottom:1rem;display:flex;align-items:center;gap:10px;}
+.alert-warning{background:#FAEEDA;color:#854F0B;border-left:3px solid #EF9F27;}
+.alert-info{background:#E6F1FB;color:#185FA5;border-left:3px solid #378ADD;}
+.alert-danger{background:#FCEBEB;color:#A32D2D;border-left:3px solid #E24B4A;}
+.collab-card{display:flex;align-items:center;gap:12px;padding:12px;border:0.5px solid #e0dfd8;border-radius:8px;margin-bottom:8px;background:#fafaf8;}
+.avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0;}
+.timeline{border-left:1px solid #d3d1c7;padding-left:1rem;margin:.5rem 0;}
+.timeline-item{position:relative;padding-bottom:1rem;font-size:13px;}
+.timeline-item::before{content:'';width:8px;height:8px;border-radius:50%;background:#d3d1c7;position:absolute;left:-1.45rem;top:4px;}
+.timeline-item.done::before{background:#3B6D11;}
+.timeline-item.active::before{background:#534AB7;}
+.progress-bar{height:6px;background:#f1efe8;border-radius:3px;overflow:hidden;margin-top:6px;}
+.progress-fill{height:100%;border-radius:3px;}
+.tab-bar{display:flex;gap:4px;border-bottom:0.5px solid #e0dfd8;margin-bottom:1.25rem;}
+.tab{padding:8px 14px;font-size:13px;color:#888780;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-0.5px;}
+.tab.active{color:#534AB7;border-bottom-color:#534AB7;font-weight:500;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.qr-box{width:60px;height:60px;background:#f5f5f2;border:0.5px solid #d3d1c7;border-radius:4px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.tag{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;background:#f1efe8;color:#5f5e5a;margin-right:4px;}
+.upload-zone{border:1px dashed #d3d1c7;border-radius:8px;padding:1.5rem;text-align:center;color:#888780;font-size:13px;margin-bottom:12px;cursor:pointer;transition:border-color .2s;}
+.upload-zone:hover{border-color:#534AB7;color:#534AB7;}
+.section-divider{border:none;border-top:0.5px solid #e0dfd8;margin:1rem 0;}
+.info-row{display:flex;border-bottom:0.5px solid #f1efe8;padding:7px 0;font-size:13px;}
+.info-row:last-child{border-bottom:none;}
+.info-label{color:#888780;width:40%;flex-shrink:0;}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:500;border:0.5px solid #e0dfd8;background:#fafaf8;color:#5f5e5a;cursor:pointer;transition:background .1s;}
+.chip.selected{background:#EEEDFE;color:#534AB7;border-color:#AFA9EC;}
+.chip:hover{background:#f1efe8;}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="sidebar">
+    <div class="logo">
+      <div class="logo-title"><i class="ti ti-tool" style="color:#534AB7;margin-right:6px"></i>Ferramental</div>
+      <div class="logo-sub">Basic Telecom</div>
+    </div>
+    <div class="nav-section">Visao geral</div>
+    <div class="nav-item active" onclick="showPage('dashboard')"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
+    <div class="nav-item" onclick="showPage('catalogo')"><i class="ti ti-package"></i> Catalogo</div>
+    <div class="nav-section">Movimentacao</div>
+    <div class="nav-item" onclick="showPage('solicitacoes')"><i class="ti ti-clipboard-list"></i> Solicitacoes</div>
+    <div class="nav-item" onclick="showPage('nova-sol')"><i class="ti ti-plus"></i> Nova solicitacao</div>
+    <div class="nav-section">Colaboradores</div>
+    <div class="nav-item" onclick="showPage('tecnicos')"><i class="ti ti-users"></i> Tecnicos</div>
+    <div class="nav-item" onclick="showPage('desligamento')"><i class="ti ti-user-off"></i> Desligamentos</div>
+    <div class="nav-section">Controle</div>
+    <div class="nav-item" onclick="showPage('vistoria')"><i class="ti ti-checklist"></i> Vistorias</div>
+    <div class="nav-item" onclick="showPage('relatorios')"><i class="ti ti-chart-bar"></i> Relatorios</div>
+  </div>
+  <div class="main">
+    <div class="page active" id="page-dashboard">
+      <div class="page-header">
+        <div class="page-title">Dashboard</div>
+        <div class="page-sub">Visao geral do ferramental e EPI em campo</div>
+      </div>
+      <div class="metrics">
+        <div class="metric">
+          <div class="metric-label">Itens em campo</div>
+          <div class="metric-value">1.284</div>
+          <div class="metric-sub">57 ferramentais · 14 EPIs</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Solicitacoes abertas</div>
+          <div class="metric-value">23</div>
+          <div class="metric-sub">8 aguardando RH</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">EPIs a vencer</div>
+          <div class="metric-value">17</div>
+          <div class="metric-sub">Proximos 30 dias</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Custo do mes</div>
+          <div class="metric-value">R$ 4.830</div>
+          <div class="metric-sub">Em perdas e substituicoes</div>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <div class="card-title">Solicitacoes recentes</div>
+          <div class="timeline">
+            <div class="timeline-item done">
+              <strong>Alicate crimpador - Campinas</strong><br>
+              <span style="color:#888780">Perdido · Supervisor validou · RH liberou</span><br>
+              <span style="font-size:11px;color:#b4b2a9">ha 2 horas</span>
+            </div>
+            <div class="timeline-item active">
+              <strong>Capacete classe B - Ribeirao Preto</strong><br>
+              <span style="color:#888780">EPI vencido · Aguardando RH</span><br>
+              <span style="font-size:11px;color:#b4b2a9">ha 4 horas</span>
+            </div>
+            <div class="timeline-item">
+              <strong>Multimetro digital - Sorocaba</strong><br>
+              <span style="color:#888780">Quebrado · Aguardando supervisor</span><br>
+              <span style="font-size:11px;color:#b4b2a9">ha 6 horas</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Alertas ativos</div>
+          <div class="alert alert-danger" style="margin-bottom:8px">
+            <i class="ti ti-user-off"></i>
+            <div><strong>3 desligamentos pendentes</strong><br><span style="font-size:12px">Itens ainda nao devolvidos ou descontados</span></div>
+          </div>
+          <div class="alert alert-warning" style="margin-bottom:8px">
+            <i class="ti ti-clock"></i>
+            <div><strong>Vistoria vencida - Bauru</strong><br><span style="font-size:12px">Ultima vistoria ha mais de 90 dias</span></div>
+          </div>
+          <div class="alert alert-info">
+            <i class="ti ti-package"></i>
+            <div><strong>12 itens prontos para retirada</strong><br><span style="font-size:12px">Separados pelo estoquista</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Distribuicao por filial</div>
+        <table>
+          <thead><tr><th>Filial</th><th>Tecnicos</th><th>Itens em campo</th><th>Solicitacoes abertas</th><th>Custo mes</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>Campinas</td><td>34</td><td>312</td><td>5</td><td>R$ 980</td><td><span class="badge badge-green">Normal</span></td></tr>
+            <tr><td>Ribeirao Preto</td><td>28</td><td>246</td><td>8</td><td>R$ 1.420</td><td><span class="badge badge-amber">Atencao</span></td></tr>
+            <tr><td>Sorocaba</td><td>22</td><td>198</td><td>3</td><td>R$ 640</td><td><span class="badge badge-green">Normal</span></td></tr>
+            <tr><td>Bauru</td><td>18</td><td>160</td><td>7</td><td>R$ 1.790</td><td><span class="badge badge-red">Critico</span></td></tr>
+            <tr><td>Piracicaba</td><td>15</td><td>134</td><td>0</td><td>R$ 0</td><td><span class="badge badge-green">Normal</span></td></tr>
+            <tr><td>Rio Preto</td><td>20</td><td>178</td><td>0</td><td>R$ 0</td><td><span class="badge badge-green">Normal</span></td></tr>
+            <tr><td>Rio Claro / Americana</td><td>12</td><td>108</td><td>0</td><td>R$ 0</td><td><span class="badge badge-green">Normal</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="page" id="page-catalogo">
+      <div class="page-header">
+        <div class="row-between">
+          <div><div class="page-title">Catalogo de itens</div><div class="page-sub">Ferramental e EPI cadastrados</div></div>
+          <button class="btn btn-primary btn-sm">Novo item</button>
+        </div>
+      </div>
+      <div class="tab-bar">
+        <div class="tab active" onclick="switchTab(this,'tab-todos')">Todos (71)</div>
+        <div class="tab" onclick="switchTab(this,'tab-ferr')">Ferramental (57)</div>
+        <div class="tab" onclick="switchTab(this,'tab-epi')">EPI (14)</div>
+      </div>
+      <div id="tab-todos">
+      <div class="card" style="padding:0">
+        <table>
+          <thead><tr><th>Item</th><th>Codigo</th><th>Tipo</th><th>Valor unit.</th><th>Estoque</th><th>Em campo</th><th>Rastreio</th><th></th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Alicate crimpador</strong></td>
+              <td><span style="font-family:monospace;font-size:12px;color:#888780">FRR-001</span></td>
+              <td><span class="badge badge-purple">Ferramental</span></td>
+              <td>R$ 420</td><td>8</td><td>46</td>
+              <td><div class="qr-box"><i class="ti ti-qrcode" style="font-size:24px;color:#888780"></i></div></td>
+              <td><button class="btn btn-sm" onclick="showPage('item-detalhe')">Ver</button></td>
+            </tr>
+            <tr>
+              <td><strong>Multimetro digital</strong></td>
+              <td><span style="font-family:monospace;font-size:12px;color:#888780">FRR-002</span></td>
+              <td><span class="badge badge-purple">Ferramental</span></td>
+              <td>R$ 890</td><td>3</td><td>51</td>
+              <td><div class="qr-box"><i class="ti ti-qrcode" style="font-size:24px;color:#888780"></i></div></td>
+              <td><button class="btn btn-sm" onclick="showPage('item-detalhe')">Ver</button></td>
+            </tr>
+            <tr>
+              <td><strong>Chave torquimetro</strong></td>
+              <td><span style="font-family:monospace;font-size:12px;color:#888780">FRR-003</span></td>
+              <td><span class="badge badge-purple">Ferramental</span></td>
+              <td>R$ 1.240</td><td>1</td><td>63</td>
+              <td><div class="qr-box"><i class="ti ti-qrcode" style="font-size:24px;color:#888780"></i></div></td>
+              <td><button class="btn btn-sm" onclick="showPage('item-detalhe')">Ver</button></td>
+            </tr>
+            <tr>
+              <td><strong>Capacete classe B</strong></td>
+              <td><span style="font-family:monospace;font-size:12px;color:#888780">EPI-001</span></td>
+              <td><span class="badge badge-blue">EPI</span></td>
+              <td>R$ 85</td><td>12</td><td>224</td>
+              <td><span style="font-family:monospace;font-size:11px;color:#534AB7">SN rastreado</span></td>
+              <td><button class="btn btn-sm">Ver</button></td>
+            </tr>
+            <tr>
+              <td><strong>Cinto de seguranca</strong></td>
+              <td><span style="font-family:monospace;font-size:12px;color:#888780">EPI-002</span></td>
+              <td><span class="badge badge-blue">EPI</span></td>
+              <td>R$ 310</td><td>5</td><td>187</td>
+              <td><span style="font-family:monospace;font-size:11px;color:#534AB7">SN rastreado</span></td>
+              <td><button class="btn btn-sm">Ver</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+    <div class="page" id="page-solicitacoes">
+      <div class="page-header">
+        <div class="row-between">
+          <div><div class="page-title">Solicitacoes</div><div class="page-sub">Acompanhe todas as solicitacoes em andamento</div></div>
+          <button class="btn btn-primary btn-sm" onclick="showPage('nova-sol')">Nova</button>
+        </div>
+      </div>
+      <div class="card" style="padding:0">
+        <table>
+          <thead><tr><th>Protocolo</th><th>Tecnico</th><th>Item</th><th>Motivo</th><th>Etapa</th><th>Filial</th><th>Data</th><th></th></tr></thead>
+          <tbody>
+            <tr>
+              <td><span style="font-family:monospace;font-size:12px">#2024-089</span></td>
+              <td>C. Oliveira</td><td>Alicate crimpador</td>
+              <td><span class="badge badge-amber">Perdido</span></td>
+              <td><span class="badge badge-green">Pronto p/ retirada</span></td>
+              <td>Campinas</td><td>14/06</td>
+              <td><button class="btn btn-sm" onclick="showPage('fluxo-sol')">Ver</button></td>
+            </tr>
+            <tr>
+              <td><span style="font-family:monospace;font-size:12px">#2024-088</span></td>
+              <td>M. Santos</td><td>Capacete classe B</td>
+              <td><span class="badge badge-blue">EPI vencido</span></td>
+              <td><span class="badge badge-amber">Aguardando RH</span></td>
+              <td>Ribeirao Preto</td><td>14/06</td>
+              <td><button class="btn btn-sm" onclick="showPage('fluxo-sol')">Ver</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="page" id="page-nova-sol">
+      <div class="page-header">
+        <div class="page-title">Nova solicitacao</div>
+        <div class="page-sub">Informe o motivo, o item e anexe as evidencias</div>
+      </div>
+      <div class="card" style="max-width:600px">
+        <div class="form-row">
+          <div>
+            <label class="form-label">Filial</label>
+            <select class="input-field"><option>Campinas</option><option>Ribeirao Preto</option><option>Sorocaba</option><option>Bauru</option></select>
+          </div>
+          <div>
+            <label class="form-label">Tecnico</label>
+            <select class="input-field"><option>C. Oliveira</option><option>M. Santos</option><option>R. Ferreira</option></select>
+          </div>
+        </div>
+        <label class="form-label">Item</label>
+        <select class="input-field">
+          <option>Alicate crimpador (FRR-001) - R$ 420</option>
+          <option>Multimetro digital (FRR-002) - R$ 890</option>
+          <option>Capacete classe B (EPI-001) - R$ 85</option>
+        </select>
+        <label class="form-label">Observacao</label>
+        <textarea class="input-field" rows="3" placeholder="Descreva o ocorrido..."></textarea>
+        <div class="row">
+          <button class="btn btn-primary" onclick="showPage('solicitacoes')">Enviar solicitacao</button>
+          <button class="btn" onclick="showPage('solicitacoes')">Cancelar</button>
+        </div>
+      </div>
+    </div>
+    <div class="page" id="page-tecnicos">
+      <div class="page-header">
+        <div class="page-title">Tecnicos</div>
+        <div class="page-sub">Visao consolidada dos itens por colaborador</div>
+      </div>
+      <div class="card">
+        <div class="collab-card">
+          <div class="avatar" style="background:#EEEDFE;color:#534AB7">CO</div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:500">C. Oliveira <span class="tag">Campinas</span></div>
+            <div style="font-size:12px;color:#888780">57 ferramentais · 14 EPIs</div>
+          </div>
+          <span class="badge badge-green">Ativo</span>
+          <button class="btn btn-sm" onclick="showPage('tecnico-itens')">Ver itens</button>
+        </div>
+        <div class="collab-card">
+          <div class="avatar" style="background:#FAEEDA;color:#854F0B">RF</div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:500">R. Ferreira <span class="tag">Sorocaba</span></div>
+            <div style="font-size:12px;color:#888780">55 ferramentais · 14 EPIs</div>
+          </div>
+          <span class="badge badge-green">Ativo</span>
+          <button class="btn btn-sm" onclick="showPage('tecnico-itens')">Ver itens</button>
+        </div>
+      </div>
+    </div>
+    <div class="page" id="page-desligamento">
+      <div class="page-header">
+        <div class="page-title">Desligamentos</div>
+        <div class="page-sub">Gestao de itens de colaboradores desligados</div>
+      </div>
+      <div class="alert alert-danger">
+        <i class="ti ti-alert-triangle"></i>
+        <div><strong>3 desligamentos com pendencias</strong></div>
+      </div>
+    </div>
+    <div class="page" id="page-vistoria">
+      <div class="page-header">
+        <div class="page-title">Vistorias periodicas</div>
+        <div class="page-sub">Confirmacao dos itens com cada tecnico a cada 90 dias</div>
+      </div>
+      <div class="card" style="padding:0">
+        <table>
+          <thead><tr><th>Tecnico</th><th>Filial</th><th>Ultima vistoria</th><th>Proxima</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>C. Oliveira</td><td>Campinas</td><td>15/03/2024</td><td>15/06/2024</td><td><span class="badge badge-red">Vencida</span></td></tr>
+            <tr><td>M. Santos</td><td>Ribeirao Preto</td><td>20/04/2024</td><td>20/07/2024</td><td><span class="badge badge-green">Em dia</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="page" id="page-relatorios">
+      <div class="page-header">
+        <div class="page-title">Relatorios</div>
+        <div class="page-sub">Custo, perdas e historico de custodia</div>
+      </div>
+      <div class="grid3" style="margin-bottom:1.5rem">
+        <div class="metric">
+          <div class="metric-label">Perdas no trimestre</div>
+          <div class="metric-value">R$ 14.280</div>
+          <div class="metric-sub">28 ocorrencias registradas</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Descontos realizados</div>
+          <div class="metric-value">R$ 9.840</div>
+          <div class="metric-sub">Recuperacao de 68%</div>
+        </div>
+        <div class="metric">
+          <div class="metric-label">Filial com maior custo</div>
+          <div class="metric-value">Bauru</div>
+          <div class="metric-sub">R$ 4.820 no periodo</div>
+        </div>
+      </div>
+    </div>
+    <div class="page" id="page-fluxo-sol">
+      <div class="page-header">
+        <button class="btn btn-sm" onclick="showPage('solicitacoes')" style="margin-bottom:10px">Voltar</button>
+        <div class="page-title">Solicitacao #2024-089</div>
+      </div>
+    </div>
+    <div class="page" id="page-item-detalhe">
+      <div class="page-header">
+        <button class="btn btn-sm" onclick="showPage('catalogo')" style="margin-bottom:10px">Voltar</button>
+        <div class="page-title">Alicate crimpador</div>
+      </div>
+    </div>
+    <div class="page" id="page-tecnico-itens">
+      <div class="page-header">
+        <button class="btn btn-sm" onclick="showPage('tecnicos')" style="margin-bottom:10px">Voltar</button>
+        <div class="page-title">C. Oliveira - Campinas</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const page = document.getElementById('page-' + id);
+  if (page) page.classList.add('active');
+  const navMap = {
+    'dashboard':0,'catalogo':1,'item-detalhe':1,
+    'solicitacoes':2,'nova-sol':3,'fluxo-sol':2,
+    'tecnicos':4,'tecnico-itens':4,'desligamento':5,
+    'vistoria':6,'relatorios':7
+  };
+  const items = document.querySelectorAll('.nav-item');
+  const idx = navMap[id];
+  if (idx !== undefined && items[idx]) items[idx].classList.add('active');
+  document.querySelector('.main').scrollTop = 0;
+}
+function switchTab(el, tabId) {
+  el.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+}
+</script>
+</body>
+</html>
