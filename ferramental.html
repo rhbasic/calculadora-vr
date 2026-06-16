@@ -105,65 +105,66 @@ select.input-field{cursor:pointer;}
       <div class="logo-title"><i class="ti ti-tool" style="color:#534AB7;margin-right:6px"></i>Ferramental</div>
       <div class="logo-sub">Basic Telecom</div>
     </div>
-    <div class="nav-section">Visao geral</div>
+    <div class="nav-section">Visão geral</div>
     <div class="nav-item active" onclick="showPage('dashboard')"><i class="ti ti-layout-dashboard"></i> Dashboard</div>
-    <div class="nav-item" onclick="showPage('catalogo')"><i class="ti ti-package"></i> Catalogo</div>
-    <div class="nav-section">Movimentacao</div>
-    <div class="nav-item" onclick="showPage('solicitacoes')"><i class="ti ti-clipboard-list"></i> Solicitacoes</div>
-    <div class="nav-item" onclick="showPage('nova-sol')"><i class="ti ti-plus"></i> Nova solicitacao</div>
+    <div class="nav-item" onclick="showPage('catalogo')"><i class="ti ti-package"></i> Catálogo</div>
+    <div class="nav-section">Movimentação</div>
+    <div class="nav-item" onclick="showPage('solicitacoes')"><i class="ti ti-clipboard-list"></i> Solicitações</div>
+    <div class="nav-item" onclick="showPage('nova-sol')"><i class="ti ti-plus"></i> Nova solicitação</div>
     <div class="nav-section">Colaboradores</div>
-    <div class="nav-item" onclick="showPage('tecnicos')"><i class="ti ti-users"></i> Tecnicos</div>
+    <div class="nav-item" onclick="showPage('tecnicos')"><i class="ti ti-users"></i> Técnicos</div>
     <div class="nav-item" onclick="showPage('desligamento')"><i class="ti ti-user-off"></i> Desligamentos</div>
     <div class="nav-section">Controle</div>
     <div class="nav-item" onclick="showPage('vistoria')"><i class="ti ti-checklist"></i> Vistorias</div>
-    <div class="nav-item" onclick="showPage('relatorios')"><i class="ti ti-chart-bar"></i> Relatorios</div>
+    <div class="nav-item" onclick="showPage('relatorios')"><i class="ti ti-chart-bar"></i> Relatórios</div>
   </div>
   <div class="main">
+    <!-- DASHBOARD -->
     <div class="page active" id="page-dashboard">
       <div class="page-header">
         <div class="page-title">Dashboard</div>
-        <div class="page-sub">Visao geral do ferramental e EPI em campo</div>
+        <div class="page-sub">Visão geral do ferramental e EPI em campo</div>
       </div>
       <div class="metrics">
         <div class="metric">
-          <div class="metric-label">Itens em campo</div>
+          <div class="metric-label"><i class="ti ti-package"></i> Itens em campo</div>
           <div class="metric-value">1.284</div>
           <div class="metric-sub">57 ferramentais · 14 EPIs</div>
         </div>
         <div class="metric">
-          <div class="metric-label">Solicitacoes abertas</div>
+          <div class="metric-label"><i class="ti ti-clipboard-list"></i> Solicitações abertas</div>
           <div class="metric-value">23</div>
           <div class="metric-sub">8 aguardando RH</div>
         </div>
         <div class="metric">
-          <div class="metric-label">EPIs a vencer</div>
+          <div class="metric-label"><i class="ti ti-alert-triangle"></i> EPIs a vencer</div>
           <div class="metric-value">17</div>
-          <div class="metric-sub">Proximos 30 dias</div>
+          <div class="metric-sub">Próximos 30 dias</div>
         </div>
         <div class="metric">
-          <div class="metric-label">Custo do mes</div>
+          <div class="metric-label"><i class="ti ti-coin"></i> Custo do mês</div>
           <div class="metric-value">R$ 4.830</div>
-          <div class="metric-sub">Em perdas e substituicoes</div>
+          <div class="metric-sub">Em perdas e substituições</div>
         </div>
       </div>
       <div class="grid2">
         <div class="card">
-          <div class="card-title">Solicitacoes recentes</div>
+          <div class="card-title">Solicitações recentes</div>
           <div class="timeline">
             <div class="timeline-item done">
-              <strong>Alicate crimpador - Campinas</strong><br>
+              <strong style="font-size:13px;color:#1a1a18">Alicate crimpador — Campinas</strong><br>
               <span style="color:#888780">Perdido · Supervisor validou · RH liberou</span><br>
-              <span style="font-size:11px;color:#b4b2a9">ha 2 horas</span>
+              <span style="font-size:11px;color:#b4b2a9">há 2 horas</span>
             </div>
             <div class="timeline-item active">
-              <strong>Capacete classe B - Ribeirao Preto</strong><br>
+              <strong style="font-size:13px;color:#1a1a18">Capacete classe B — Ribeirão Preto</strong><br>
               <span style="color:#888780">EPI vencido · Aguardando RH</span><br>
-              <span style="font-size:11px;color:#b4b2a9">ha 4 horas</span>
+              <span style="font-size:11px;color:#b4b2a9">há 4 horas</span>
             </div>
             <div class="timeline-item">
-              <strong>Multimetro digital - Sorocaba</strong><br>
+              <strong style="font-size:13px;color:#1a1a18">Multímetro digital — Sorocaba</strong><br>
               <span style="color:#888780">Quebrado · Aguardando supervisor</span><br>
-              <span style="font-size:11px;color:#b4b2a9">ha 6 horas</span>
+              <span style="font-size:11px;color:#b4b2a9">há 6 horas</span>
             </div>
           </div>
         </div>
@@ -171,11 +172,11 @@ select.input-field{cursor:pointer;}
           <div class="card-title">Alertas ativos</div>
           <div class="alert alert-danger" style="margin-bottom:8px">
             <i class="ti ti-user-off"></i>
-            <div><strong>3 desligamentos pendentes</strong><br><span style="font-size:12px">Itens ainda nao devolvidos ou descontados</span></div>
+            <div><strong>3 desligamentos pendentes</strong><br><span style="font-size:12px">Itens ainda não devolvidos ou descontados</span></div>
           </div>
           <div class="alert alert-warning" style="margin-bottom:8px">
             <i class="ti ti-clock"></i>
-            <div><strong>Vistoria vencida - Bauru</strong><br><span style="font-size:12px">Ultima vistoria ha mais de 90 dias</span></div>
+            <div><strong>Vistoria vencida — Bauru</strong><br><span style="font-size:12px">Última vistoria há mais de 90 dias</span></div>
           </div>
           <div class="alert alert-info">
             <i class="ti ti-package"></i>
@@ -184,14 +185,14 @@ select.input-field{cursor:pointer;}
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Distribuicao por filial</div>
+        <div class="card-title">Distribuição por filial</div>
         <table>
-          <thead><tr><th>Filial</th><th>Tecnicos</th><th>Itens em campo</th><th>Solicitacoes abertas</th><th>Custo mes</th><th>Status</th></tr></thead>
+          <thead><tr><th>Filial</th><th>Técnicos</th><th>Itens em campo</th><th>Solicitações abertas</th><th>Custo mês</th><th>Status</th></tr></thead>
           <tbody>
             <tr><td>Campinas</td><td>34</td><td>312</td><td>5</td><td>R$ 980</td><td><span class="badge badge-green">Normal</span></td></tr>
-            <tr><td>Ribeirao Preto</td><td>28</td><td>246</td><td>8</td><td>R$ 1.420</td><td><span class="badge badge-amber">Atencao</span></td></tr>
+            <tr><td>Ribeirão Preto</td><td>28</td><td>246</td><td>8</td><td>R$ 1.420</td><td><span class="badge badge-amber">Atenção</span></td></tr>
             <tr><td>Sorocaba</td><td>22</td><td>198</td><td>3</td><td>R$ 640</td><td><span class="badge badge-green">Normal</span></td></tr>
-            <tr><td>Bauru</td><td>18</td><td>160</td><td>7</td><td>R$ 1.790</td><td><span class="badge badge-red">Critico</span></td></tr>
+            <tr><td>Bauru</td><td>18</td><td>160</td><td>7</td><td>R$ 1.790</td><td><span class="badge badge-red">Crítico</span></td></tr>
             <tr><td>Piracicaba</td><td>15</td><td>134</td><td>0</td><td>R$ 0</td><td><span class="badge badge-green">Normal</span></td></tr>
             <tr><td>Rio Preto</td><td>20</td><td>178</td><td>0</td><td>R$ 0</td><td><span class="badge badge-green">Normal</span></td></tr>
             <tr><td>Rio Claro / Americana</td><td>12</td><td>108</td><td>0</td><td>R$ 0</td><td><span class="badge badge-green">Normal</span></td></tr>
@@ -199,11 +200,12 @@ select.input-field{cursor:pointer;}
         </table>
       </div>
     </div>
+    <!-- CATÁLOGO -->
     <div class="page" id="page-catalogo">
       <div class="page-header">
         <div class="row-between">
-          <div><div class="page-title">Catalogo de itens</div><div class="page-sub">Ferramental e EPI cadastrados</div></div>
-          <button class="btn btn-primary btn-sm">Novo item</button>
+          <div><div class="page-title">Catálogo de itens</div><div class="page-sub">Ferramental e EPI cadastrados</div></div>
+          <button class="btn btn-primary btn-sm"><i class="ti ti-plus"></i> Novo item</button>
         </div>
       </div>
       <div class="tab-bar">
@@ -214,10 +216,10 @@ select.input-field{cursor:pointer;}
       <div id="tab-todos">
       <div class="card" style="padding:0">
         <table>
-          <thead><tr><th>Item</th><th>Codigo</th><th>Tipo</th><th>Valor unit.</th><th>Estoque</th><th>Em campo</th><th>Rastreio</th><th></th></tr></thead>
+          <thead><tr><th>Item</th><th>Código</th><th>Tipo</th><th>Valor unit.</th><th>Estoque</th><th>Em campo</th><th>Rastreio</th><th></th></tr></thead>
           <tbody>
             <tr>
-              <td><strong>Alicate crimpador</strong></td>
+              <td><strong style="font-size:13px">Alicate crimpador</strong></td>
               <td><span style="font-family:monospace;font-size:12px;color:#888780">FRR-001</span></td>
               <td><span class="badge badge-purple">Ferramental</span></td>
               <td>R$ 420</td><td>8</td><td>46</td>
@@ -225,7 +227,7 @@ select.input-field{cursor:pointer;}
               <td><button class="btn btn-sm" onclick="showPage('item-detalhe')">Ver</button></td>
             </tr>
             <tr>
-              <td><strong>Multimetro digital</strong></td>
+              <td><strong style="font-size:13px">Multímetro digital</strong></td>
               <td><span style="font-family:monospace;font-size:12px;color:#888780">FRR-002</span></td>
               <td><span class="badge badge-purple">Ferramental</span></td>
               <td>R$ 890</td><td>3</td><td>51</td>
@@ -233,7 +235,7 @@ select.input-field{cursor:pointer;}
               <td><button class="btn btn-sm" onclick="showPage('item-detalhe')">Ver</button></td>
             </tr>
             <tr>
-              <td><strong>Chave torquimetro</strong></td>
+              <td><strong style="font-size:13px">Chave torquímetro</strong></td>
               <td><span style="font-family:monospace;font-size:12px;color:#888780">FRR-003</span></td>
               <td><span class="badge badge-purple">Ferramental</span></td>
               <td>R$ 1.240</td><td>1</td><td>63</td>
@@ -241,7 +243,7 @@ select.input-field{cursor:pointer;}
               <td><button class="btn btn-sm" onclick="showPage('item-detalhe')">Ver</button></td>
             </tr>
             <tr>
-              <td><strong>Capacete classe B</strong></td>
+              <td><strong style="font-size:13px">Capacete classe B</strong></td>
               <td><span style="font-family:monospace;font-size:12px;color:#888780">EPI-001</span></td>
               <td><span class="badge badge-blue">EPI</span></td>
               <td>R$ 85</td><td>12</td><td>224</td>
@@ -249,11 +251,27 @@ select.input-field{cursor:pointer;}
               <td><button class="btn btn-sm">Ver</button></td>
             </tr>
             <tr>
-              <td><strong>Cinto de seguranca</strong></td>
+              <td><strong style="font-size:13px">Cinto de segurança</strong></td>
               <td><span style="font-family:monospace;font-size:12px;color:#888780">EPI-002</span></td>
               <td><span class="badge badge-blue">EPI</span></td>
               <td>R$ 310</td><td>5</td><td>187</td>
               <td><span style="font-family:monospace;font-size:11px;color:#534AB7">SN rastreado</span></td>
+              <td><button class="btn btn-sm">Ver</button></td>
+            </tr>
+            <tr>
+              <td><strong style="font-size:13px">Luvas de borracha isolante</strong></td>
+              <td><span style="font-family:monospace;font-size:12px;color:#888780">EPI-003</span></td>
+              <td><span class="badge badge-blue">EPI</span></td>
+              <td>R$ 62</td><td>20</td><td>198</td>
+              <td><span style="font-family:monospace;font-size:11px;color:#534AB7">SN rastreado</span></td>
+              <td><button class="btn btn-sm">Ver</button></td>
+            </tr>
+            <tr>
+              <td><strong style="font-size:13px">Fusível caixa 100un</strong></td>
+              <td><span style="font-family:monospace;font-size:12px;color:#888780">FRR-041</span></td>
+              <td><span class="badge badge-gray">Consumível</span></td>
+              <td>R$ 18</td><td>34</td><td>—</td>
+              <td>—</td>
               <td><button class="btn btn-sm">Ver</button></td>
             </tr>
           </tbody>
@@ -261,22 +279,73 @@ select.input-field{cursor:pointer;}
       </div>
       </div>
     </div>
+    <!-- DETALHE DO ITEM -->
+    <div class="page" id="page-item-detalhe">
+      <div class="page-header">
+        <button class="btn btn-sm" onclick="showPage('catalogo')" style="margin-bottom:10px"><i class="ti ti-arrow-left"></i> Voltar</button>
+        <div class="row-between">
+          <div><div class="page-title">Alicate crimpador</div><div class="page-sub">FRR-001 · Ferramental</div></div>
+          <div class="row">
+            <button class="btn btn-sm"><i class="ti ti-qrcode"></i> Gerar QR</button>
+            <button class="btn btn-sm"><i class="ti ti-edit"></i> Editar</button>
+          </div>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <div class="card-title">Informações do item</div>
+          <div class="info-row"><span class="info-label">Código</span><span style="font-family:monospace">FRR-001</span></div>
+          <div class="info-row"><span class="info-label">Tipo</span><span class="badge badge-purple">Ferramental</span></div>
+          <div class="info-row"><span class="info-label">Valor unitário</span><strong>R$ 420,00</strong></div>
+          <div class="info-row"><span class="info-label">Em estoque</span>8 unidades</div>
+          <div class="info-row"><span class="info-label">Em campo</span>46 unidades</div>
+          <div class="info-row"><span class="info-label">Total da frota</span>54 unidades</div>
+          <div class="info-row"><span class="info-label">Valor em campo</span>R$ 19.320,00</div>
+          <div class="info-row"><span class="info-label">Rastreio</span>QR Code por unidade</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Histórico de custódia — unidade #0042</div>
+          <div class="timeline">
+            <div class="timeline-item active">
+              <strong style="font-size:13px;color:#1a1a18">C. Oliveira — Campinas</strong>
+              <span style="color:#888780">Recebeu em 10/01/2024 · Em uso</span>
+            </div>
+            <div class="timeline-item done">
+              <strong style="font-size:13px;color:#1a1a18">T. Rocha</strong>
+              <span style="color:#888780">Recebeu em 05/08/2023 · Devolveu em 09/01/2024 · Bom estado</span>
+            </div>
+            <div class="timeline-item done">
+              <strong style="font-size:13px;color:#1a1a18">Estoque central</strong>
+              <span style="color:#888780">Entrada em 01/08/2023 · NF 4821</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- SOLICITAÇÕES -->
     <div class="page" id="page-solicitacoes">
       <div class="page-header">
         <div class="row-between">
-          <div><div class="page-title">Solicitacoes</div><div class="page-sub">Acompanhe todas as solicitacoes em andamento</div></div>
-          <button class="btn btn-primary btn-sm" onclick="showPage('nova-sol')">Nova</button>
+          <div><div class="page-title">Solicitações</div><div class="page-sub">Acompanhe todas as solicitações em andamento</div></div>
+          <button class="btn btn-primary btn-sm" onclick="showPage('nova-sol')"><i class="ti ti-plus"></i> Nova</button>
         </div>
+      </div>
+      <div class="row" style="margin-bottom:1rem;gap:8px">
+        <div class="chip selected">Todas</div>
+        <div class="chip">Aguardando supervisor</div>
+        <div class="chip">Aguardando RH</div>
+        <div class="chip">Pronto p/ retirada</div>
+        <div class="chip">Concluídas</div>
       </div>
       <div class="card" style="padding:0">
         <table>
-          <thead><tr><th>Protocolo</th><th>Tecnico</th><th>Item</th><th>Motivo</th><th>Etapa</th><th>Filial</th><th>Data</th><th></th></tr></thead>
+          <thead><tr><th>Protocolo</th><th>Técnico</th><th>Item</th><th>Motivo</th><th>Etapa</th><th>Filial</th><th>Data</th><th></th></tr></thead>
           <tbody>
             <tr>
               <td><span style="font-family:monospace;font-size:12px">#2024-089</span></td>
               <td>C. Oliveira</td><td>Alicate crimpador</td>
               <td><span class="badge badge-amber">Perdido</span></td>
-              <td><span class="badge badge-green">Pronto p/ retirada</span></td>
+              <td><span class="badge badge-green"><i class="ti ti-check"></i> Pronto p/ retirada</span></td>
               <td>Campinas</td><td>14/06</td>
               <td><button class="btn btn-sm" onclick="showPage('fluxo-sol')">Ver</button></td>
             </tr>
@@ -285,133 +354,393 @@ select.input-field{cursor:pointer;}
               <td>M. Santos</td><td>Capacete classe B</td>
               <td><span class="badge badge-blue">EPI vencido</span></td>
               <td><span class="badge badge-amber">Aguardando RH</span></td>
-              <td>Ribeirao Preto</td><td>14/06</td>
+              <td>Ribeirão Preto</td><td>14/06</td>
+              <td><button class="btn btn-sm" onclick="showPage('fluxo-sol')">Ver</button></td>
+            </tr>
+            <tr>
+              <td><span style="font-family:monospace;font-size:12px">#2024-087</span></td>
+              <td>R. Ferreira</td><td>Multímetro digital</td>
+              <td><span class="badge badge-red">Quebrado</span></td>
+              <td><span class="badge badge-purple">Aguardando supervisor</span></td>
+              <td>Sorocaba</td><td>13/06</td>
+              <td><button class="btn btn-sm" onclick="showPage('fluxo-sol')">Ver</button></td>
+            </tr>
+            <tr>
+              <td><span style="font-family:monospace;font-size:12px">#2024-086</span></td>
+              <td>L. Carvalho</td><td>Cinto de segurança</td>
+              <td><span class="badge badge-red">Quebrado</span></td>
+              <td><span class="badge badge-green">Concluída</span></td>
+              <td>Bauru</td><td>12/06</td>
               <td><button class="btn btn-sm" onclick="showPage('fluxo-sol')">Ver</button></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+    <!-- FLUXO SOLICITAÇÃO DETALHE -->
+    <div class="page" id="page-fluxo-sol">
+      <div class="page-header">
+        <button class="btn btn-sm" onclick="showPage('solicitacoes')" style="margin-bottom:10px"><i class="ti ti-arrow-left"></i> Voltar</button>
+        <div class="row-between">
+          <div>
+            <div class="page-title">Solicitação #2024-089</div>
+            <div class="page-sub">Alicate crimpador · C. Oliveira · Campinas</div>
+          </div>
+          <span class="badge badge-green" style="font-size:13px;padding:6px 14px">Pronto para retirada</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="flow-steps">
+          <div class="flow-step">
+            <div class="step-circle step-done"><i class="ti ti-check"></i></div>
+            <div class="step-label"><strong>Técnico</strong>Solicitação aberta</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-circle step-done"><i class="ti ti-check"></i></div>
+            <div class="step-label"><strong>Supervisor</strong>Validado c/ foto</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-circle step-done"><i class="ti ti-check"></i></div>
+            <div class="step-label"><strong>RH</strong>Termo aprovado</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-circle step-done"><i class="ti ti-check"></i></div>
+            <div class="step-label"><strong>Estoque</strong>Item separado</div>
+          </div>
+          <div class="flow-step">
+            <div class="step-circle step-active"><i class="ti ti-writing"></i></div>
+            <div class="step-label"><strong>Técnico</strong>Aceite e assinatura</div>
+          </div>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="card">
+          <div class="card-title">Detalhes</div>
+          <div class="info-row"><span class="info-label">Item</span>Alicate crimpador (FRR-001)</div>
+          <div class="info-row"><span class="info-label">Motivo</span><span class="badge badge-amber">Perdido</span></div>
+          <div class="info-row"><span class="info-label">Valor desconto</span><strong>R$ 420,00</strong></div>
+          <div class="info-row"><span class="info-label">Forma</span>Desconto em folha (3x)</div>
+          <div class="info-row"><span class="info-label">Supervisor</span>J. Gallo</div>
+          <div class="info-row"><span class="info-label">Data abertura</span>14/06/2024</div>
+        </div>
+        <div class="card">
+          <div class="card-title">Evidências do supervisor</div>
+          <div style="display:flex;gap:8px;margin-bottom:12px">
+            <div style="width:80px;height:60px;background:#f5f5f2;border-radius:8px;display:flex;align-items:center;justify-content:center;border:0.5px solid #e0dfd8"><i class="ti ti-photo" style="font-size:20px;color:#b4b2a9"></i></div>
+            <div style="width:80px;height:60px;background:#f5f5f2;border-radius:8px;display:flex;align-items:center;justify-content:center;border:0.5px solid #e0dfd8"><i class="ti ti-video" style="font-size:20px;color:#b4b2a9"></i></div>
+          </div>
+          <div style="font-size:12px;color:#888780;background:#fafaf8;border-radius:8px;padding:10px;border:0.5px solid #e0dfd8">"Item não localizado durante vistoria do veículo. Confirmado pelos demais técnicos."</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Termo de desconto</div>
+        <div style="background:#fafaf8;border:0.5px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:1rem;font-size:13px;color:#5f5e5a">
+          Declaro que estou ciente do desconto de <strong>R$ 420,00</strong> referente ao item <strong>Alicate crimpador (FRR-001)</strong>, a ser realizado em <strong>3 parcelas de R$ 140,00</strong> nas competências 07, 08 e 09/2024.
+        </div>
+        <div class="alert alert-info" style="margin-bottom:1rem">
+          <i class="ti ti-writing"></i>
+          <div>O técnico precisa confirmar o recebimento do novo item e assinar o termo de responsabilidade para finalizar esta solicitação.</div>
+        </div>
+        <div class="row">
+          <button class="btn btn-primary"><i class="ti ti-writing"></i> Registrar aceite e assinatura</button>
+          <button class="btn btn-sm"><i class="ti ti-download"></i> Exportar PDF</button>
+        </div>
+      </div>
+    </div>
+    <!-- NOVA SOLICITAÇÃO -->
     <div class="page" id="page-nova-sol">
       <div class="page-header">
-        <div class="page-title">Nova solicitacao</div>
-        <div class="page-sub">Informe o motivo, o item e anexe as evidencias</div>
+        <div class="page-title">Nova solicitação</div>
+        <div class="page-sub">Informe o motivo, o item e anexe as evidências</div>
       </div>
       <div class="card" style="max-width:600px">
         <div class="form-row">
           <div>
             <label class="form-label">Filial</label>
-            <select class="input-field"><option>Campinas</option><option>Ribeirao Preto</option><option>Sorocaba</option><option>Bauru</option></select>
+            <select class="input-field"><option>Campinas</option><option>Ribeirão Preto</option><option>Sorocaba</option><option>Bauru</option><option>Piracicaba</option><option>Rio Preto</option><option>Rio Claro / Americana</option></select>
           </div>
           <div>
-            <label class="form-label">Tecnico</label>
-            <select class="input-field"><option>C. Oliveira</option><option>M. Santos</option><option>R. Ferreira</option></select>
+            <label class="form-label">Técnico</label>
+            <select class="input-field"><option>C. Oliveira</option><option>M. Santos</option><option>R. Ferreira</option><option>L. Carvalho</option></select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div>
+            <label class="form-label">Tipo de item</label>
+            <select class="input-field" onchange="updateMotivos(this)">
+              <option>Ferramental</option>
+              <option>EPI</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Motivo</label>
+            <select class="input-field" id="sel-motivo">
+              <option>Perdido</option>
+              <option>Quebrado</option>
+              <option>Desgaste</option>
+              <option>Item faltante</option>
+            </select>
           </div>
         </div>
         <label class="form-label">Item</label>
         <select class="input-field">
-          <option>Alicate crimpador (FRR-001) - R$ 420</option>
-          <option>Multimetro digital (FRR-002) - R$ 890</option>
-          <option>Capacete classe B (EPI-001) - R$ 85</option>
+          <option>Alicate crimpador (FRR-001) — R$ 420</option>
+          <option>Multímetro digital (FRR-002) — R$ 890</option>
+          <option>Chave torquímetro (FRR-003) — R$ 1.240</option>
+          <option>Capacete classe B (EPI-001) — R$ 85</option>
+          <option>Cinto de segurança (EPI-002) — R$ 310</option>
         </select>
-        <label class="form-label">Observacao</label>
-        <textarea class="input-field" rows="3" placeholder="Descreva o ocorrido..."></textarea>
+        <label class="form-label">Observação</label>
+        <textarea class="input-field" rows="3" style="resize:vertical" placeholder="Descreva o ocorrido com o máximo de detalhes..."></textarea>
+        <label class="form-label">Evidências (foto / vídeo)</label>
+        <div class="upload-zone">
+          <i class="ti ti-upload" style="font-size:24px;display:block;margin-bottom:6px"></i>
+          Clique para anexar ou arraste aqui<br>
+          <span style="font-size:11px;color:#b4b2a9">JPG, PNG, MP4 · Máx. 50 MB por arquivo</span>
+        </div>
         <div class="row">
-          <button class="btn btn-primary" onclick="showPage('solicitacoes')">Enviar solicitacao</button>
+          <button class="btn btn-primary" onclick="showPage('solicitacoes')"><i class="ti ti-send"></i> Enviar solicitação</button>
           <button class="btn" onclick="showPage('solicitacoes')">Cancelar</button>
         </div>
       </div>
     </div>
+    <!-- TÉCNICOS -->
     <div class="page" id="page-tecnicos">
       <div class="page-header">
-        <div class="page-title">Tecnicos</div>
-        <div class="page-sub">Visao consolidada dos itens por colaborador</div>
+        <div class="page-title">Técnicos</div>
+        <div class="page-sub">Visão consolidada dos itens por colaborador</div>
       </div>
       <div class="card">
         <div class="collab-card">
           <div class="avatar" style="background:#EEEDFE;color:#534AB7">CO</div>
           <div style="flex:1">
             <div style="font-size:14px;font-weight:500">C. Oliveira <span class="tag">Campinas</span></div>
-            <div style="font-size:12px;color:#888780">57 ferramentais · 14 EPIs</div>
+            <div style="font-size:12px;color:#888780">57 ferramentais · 14 EPIs · 1 solicitação aberta</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%;background:#534AB7"></div></div>
           </div>
           <span class="badge badge-green">Ativo</span>
-          <button class="btn btn-sm" onclick="showPage('tecnico-itens')">Ver itens</button>
+          <button class="btn btn-sm" onclick="showPage('tecnico-itens')"><i class="ti ti-list"></i> Ver itens</button>
+        </div>
+        <div class="collab-card">
+          <div class="avatar" style="background:#E1F5EE;color:#0F6E56">MS</div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:500">M. Santos <span class="tag">Ribeirão Preto</span></div>
+            <div style="font-size:12px;color:#888780">54 ferramentais · 13 EPIs · EPI vencendo em 5 dias</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:94%;background:#EF9F27"></div></div>
+          </div>
+          <span class="badge badge-amber">EPI vencendo</span>
+          <button class="btn btn-sm" onclick="showPage('tecnico-itens')"><i class="ti ti-list"></i> Ver itens</button>
         </div>
         <div class="collab-card">
           <div class="avatar" style="background:#FAEEDA;color:#854F0B">RF</div>
           <div style="flex:1">
             <div style="font-size:14px;font-weight:500">R. Ferreira <span class="tag">Sorocaba</span></div>
             <div style="font-size:12px;color:#888780">55 ferramentais · 14 EPIs</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%;background:#534AB7"></div></div>
           </div>
           <span class="badge badge-green">Ativo</span>
-          <button class="btn btn-sm" onclick="showPage('tecnico-itens')">Ver itens</button>
+          <button class="btn btn-sm" onclick="showPage('tecnico-itens')"><i class="ti ti-list"></i> Ver itens</button>
+        </div>
+        <div class="collab-card">
+          <div class="avatar" style="background:#FCEBEB;color:#A32D2D">LC</div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:500">L. Carvalho <span class="tag">Bauru</span></div>
+            <div style="font-size:12px;color:#888780">57 ferramentais · 14 EPIs</div>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%;background:#534AB7"></div></div>
+          </div>
+          <span class="badge badge-green">Ativo</span>
+          <button class="btn btn-sm" onclick="showPage('tecnico-itens')"><i class="ti ti-list"></i> Ver itens</button>
         </div>
       </div>
     </div>
-    <div class="page" id="page-desligamento">
+    <!-- TÉCNICO ITENS -->
+    <div class="page" id="page-tecnico-itens">
       <div class="page-header">
-        <div class="page-title">Desligamentos</div>
-        <div class="page-sub">Gestao de itens de colaboradores desligados</div>
-      </div>
-      <div class="alert alert-danger">
-        <i class="ti ti-alert-triangle"></i>
-        <div><strong>3 desligamentos com pendencias</strong></div>
-      </div>
-    </div>
-    <div class="page" id="page-vistoria">
-      <div class="page-header">
-        <div class="page-title">Vistorias periodicas</div>
-        <div class="page-sub">Confirmacao dos itens com cada tecnico a cada 90 dias</div>
+        <button class="btn btn-sm" onclick="showPage('tecnicos')" style="margin-bottom:10px"><i class="ti ti-arrow-left"></i> Voltar</button>
+        <div class="row-between">
+          <div>
+            <div class="page-title">C. Oliveira — Campinas</div>
+            <div class="page-sub">71 itens atribuídos · Ativo desde 10/01/2022</div>
+          </div>
+          <button class="btn btn-sm btn-danger" onclick="showPage('desligamento')"><i class="ti ti-user-off"></i> Iniciar desligamento</button>
+        </div>
       </div>
       <div class="card" style="padding:0">
         <table>
-          <thead><tr><th>Tecnico</th><th>Filial</th><th>Ultima vistoria</th><th>Proxima</th><th>Status</th></tr></thead>
+          <thead><tr><th>Item</th><th>Código</th><th>Tipo</th><th>Serial / QR</th><th>Recebido em</th><th>Validade EPI</th><th>Condição</th></tr></thead>
           <tbody>
-            <tr><td>C. Oliveira</td><td>Campinas</td><td>15/03/2024</td><td>15/06/2024</td><td><span class="badge badge-red">Vencida</span></td></tr>
-            <tr><td>M. Santos</td><td>Ribeirao Preto</td><td>20/04/2024</td><td>20/07/2024</td><td><span class="badge badge-green">Em dia</span></td></tr>
+            <tr><td>Alicate crimpador</td><td style="font-family:monospace;font-size:12px">FRR-001</td><td><span class="badge badge-purple">Ferramental</span></td><td style="font-family:monospace;font-size:11px">QR-1042</td><td>10/01/2024</td><td>—</td><td><span class="badge badge-green">Bom</span></td></tr>
+            <tr><td>Multímetro digital</td><td style="font-family:monospace;font-size:12px">FRR-002</td><td><span class="badge badge-purple">Ferramental</span></td><td style="font-family:monospace;font-size:11px">QR-2031</td><td>10/01/2024</td><td>—</td><td><span class="badge badge-green">Bom</span></td></tr>
+            <tr><td>Capacete classe B</td><td style="font-family:monospace;font-size:12px">EPI-001</td><td><span class="badge badge-blue">EPI</span></td><td style="font-family:monospace;font-size:11px">SN-4821</td><td>10/01/2024</td><td style="color:#A32D2D;font-weight:500">21/06/2024</td><td><span class="badge badge-red">Vencendo</span></td></tr>
+            <tr><td>Cinto de segurança</td><td style="font-family:monospace;font-size:12px">EPI-002</td><td><span class="badge badge-blue">EPI</span></td><td style="font-family:monospace;font-size:11px">SN-3902</td><td>10/01/2024</td><td>10/01/2026</td><td><span class="badge badge-green">Bom</span></td></tr>
           </tbody>
         </table>
       </div>
     </div>
+    <!-- DESLIGAMENTO -->
+    <div class="page" id="page-desligamento">
+      <div class="page-header">
+        <div class="page-title">Desligamentos</div>
+        <div class="page-sub">Gestão de itens de colaboradores desligados</div>
+      </div>
+      <div class="alert alert-danger">
+        <i class="ti ti-alert-triangle"></i>
+        <div><strong>3 desligamentos com pendências</strong> — itens em aberto precisam de tratativa antes do encerramento.</div>
+      </div>
+      <div class="card">
+        <div class="row-between">
+          <div style="display:flex;align-items:center;gap:12px">
+            <div class="avatar" style="background:#FCEBEB;color:#A32D2D">PL</div>
+            <div>
+              <div style="font-size:15px;font-weight:500">P. Lima</div>
+              <div style="font-size:12px;color:#888780">Desligado em 10/06/2024 · Bauru</div>
+            </div>
+          </div>
+          <span class="badge badge-red">Pendente</span>
+        </div>
+        <hr class="section-divider">
+        <div class="grid2" style="margin-bottom:1rem">
+          <div style="background:#fafaf8;border-radius:8px;padding:12px;border:0.5px solid #e0dfd8">
+            <div style="font-size:12px;color:#888780;margin-bottom:4px">Itens com o colaborador</div>
+            <div style="font-size:20px;font-weight:500">71</div>
+            <div style="font-size:12px;color:#b4b2a9">57 ferramentais · 14 EPIs</div>
+          </div>
+          <div style="background:#fafaf8;border-radius:8px;padding:12px;border:0.5px solid #e0dfd8">
+            <div style="font-size:12px;color:#888780;margin-bottom:4px">Valor total em aberto</div>
+            <div style="font-size:20px;font-weight:500">R$ 6.240</div>
+            <div style="font-size:12px;color:#b4b2a9">A descontar ou devolver</div>
+          </div>
+        </div>
+        <table style="margin-bottom:1rem">
+          <thead><tr><th>Item</th><th>Código</th><th>Serial</th><th>Status</th><th>Valor</th><th>Ação</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>Alicate crimpador</td>
+              <td style="font-family:monospace;font-size:11px">FRR-001</td>
+              <td style="font-family:monospace;font-size:11px">QR-1042</td>
+              <td><span class="badge badge-red">Não devolvido</span></td>
+              <td>R$ 420</td>
+              <td><span style="font-size:12px;color:#534AB7;font-weight:500">Desconto automático</span></td>
+            </tr>
+            <tr>
+              <td>Multímetro digital</td>
+              <td style="font-family:monospace;font-size:11px">FRR-002</td>
+              <td style="font-family:monospace;font-size:11px">QR-2031</td>
+              <td><span class="badge badge-green">Devolvido</span></td>
+              <td>—</td>
+              <td><span style="font-size:12px;color:#888780">Baixado</span></td>
+            </tr>
+            <tr>
+              <td>Capacete classe B</td>
+              <td style="font-family:monospace;font-size:11px">EPI-001</td>
+              <td style="font-family:monospace;font-size:11px">SN-4821</td>
+              <td><span class="badge badge-amber">Em análise</span></td>
+              <td>R$ 85</td>
+              <td><span style="font-size:12px;color:#534AB7;font-weight:500">Aguardando foto</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="background:#fafaf8;border:0.5px solid #e0dfd8;border-radius:8px;padding:1rem;margin-bottom:1rem;font-size:13px">
+          <div style="font-weight:500;margin-bottom:6px"><i class="ti ti-file-certificate" style="color:#534AB7;margin-right:6px"></i>Termo de desconto gerado automaticamente</div>
+          <div style="color:#5f5e5a">R$ 505,00 em 2 parcelas de R$ 252,50 · Competências 07 e 08/2024</div>
+          <div style="color:#888780;font-size:12px;margin-top:4px">Aguardando assinatura digital e foto do colaborador</div>
+        </div>
+        <div class="row">
+          <button class="btn btn-primary"><i class="ti ti-send"></i> Enviar termo para assinatura</button>
+          <button class="btn btn-sm"><i class="ti ti-download"></i> Exportar PDF</button>
+        </div>
+      </div>
+    </div>
+    <!-- VISTORIAS -->
+    <div class="page" id="page-vistoria">
+      <div class="page-header">
+        <div class="row-between">
+          <div><div class="page-title">Vistorias periódicas</div><div class="page-sub">Confirmação dos itens com cada técnico a cada 90 dias</div></div>
+          <button class="btn btn-primary btn-sm"><i class="ti ti-plus"></i> Agendar vistoria</button>
+        </div>
+      </div>
+      <div class="card" style="padding:0">
+        <table>
+          <thead><tr><th>Técnico</th><th>Filial</th><th>Última vistoria</th><th>Próxima</th><th>Status</th><th></th></tr></thead>
+          <tbody>
+            <tr>
+              <td>C. Oliveira</td><td>Campinas</td><td>15/03/2024</td><td>15/06/2024</td>
+              <td><span class="badge badge-red">Vencida</span></td>
+              <td><button class="btn btn-sm btn-primary">Iniciar vistoria</button></td>
+            </tr>
+            <tr>
+              <td>M. Santos</td><td>Ribeirão Preto</td><td>20/04/2024</td><td>20/07/2024</td>
+              <td><span class="badge badge-green">Em dia</span></td>
+              <td><button class="btn btn-sm">Ver</button></td>
+            </tr>
+            <tr>
+              <td>R. Ferreira</td><td>Sorocaba</td><td>05/05/2024</td><td>05/08/2024</td>
+              <td><span class="badge badge-green">Em dia</span></td>
+              <td><button class="btn btn-sm">Ver</button></td>
+            </tr>
+            <tr>
+              <td>L. Carvalho</td><td>Bauru</td><td>01/03/2024</td><td>01/06/2024</td>
+              <td><span class="badge badge-red">Vencida</span></td>
+              <td><button class="btn btn-sm btn-primary">Iniciar vistoria</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- RELATÓRIOS -->
     <div class="page" id="page-relatorios">
       <div class="page-header">
-        <div class="page-title">Relatorios</div>
-        <div class="page-sub">Custo, perdas e historico de custodia</div>
+        <div class="row-between">
+          <div><div class="page-title">Relatórios</div><div class="page-sub">Custo, perdas e histórico de custódia</div></div>
+          <button class="btn btn-sm"><i class="ti ti-download"></i> Exportar Excel</button>
+        </div>
       </div>
       <div class="grid3" style="margin-bottom:1.5rem">
         <div class="metric">
           <div class="metric-label">Perdas no trimestre</div>
           <div class="metric-value">R$ 14.280</div>
-          <div class="metric-sub">28 ocorrencias registradas</div>
+          <div class="metric-sub">28 ocorrências registradas</div>
         </div>
         <div class="metric">
           <div class="metric-label">Descontos realizados</div>
           <div class="metric-value">R$ 9.840</div>
-          <div class="metric-sub">Recuperacao de 68%</div>
+          <div class="metric-sub">Recuperação de 68%</div>
         </div>
         <div class="metric">
           <div class="metric-label">Filial com maior custo</div>
           <div class="metric-value">Bauru</div>
-          <div class="metric-sub">R$ 4.820 no periodo</div>
+          <div class="metric-sub">R$ 4.820 no período</div>
         </div>
       </div>
-    </div>
-    <div class="page" id="page-fluxo-sol">
-      <div class="page-header">
-        <button class="btn btn-sm" onclick="showPage('solicitacoes')" style="margin-bottom:10px">Voltar</button>
-        <div class="page-title">Solicitacao #2024-089</div>
+      <div class="card">
+        <div class="card-title">Custo por filial — junho 2024</div>
+        <table>
+          <thead><tr><th>Filial</th><th>Perdas</th><th>Descontos recuperados</th><th>Custo líquido</th><th>Ocorrências</th></tr></thead>
+          <tbody>
+            <tr><td>Bauru</td><td>R$ 4.820</td><td>R$ 3.100</td><td style="color:#A32D2D;font-weight:500">R$ 1.720</td><td>9</td></tr>
+            <tr><td>Ribeirão Preto</td><td>R$ 3.240</td><td>R$ 2.400</td><td style="color:#A32D2D;font-weight:500">R$ 840</td><td>6</td></tr>
+            <tr><td>Campinas</td><td>R$ 2.100</td><td>R$ 1.820</td><td>R$ 280</td><td>4</td></tr>
+            <tr><td>Sorocaba</td><td>R$ 1.440</td><td>R$ 1.440</td><td style="color:#3B6D11">R$ 0</td><td>3</td></tr>
+            <tr><td>Piracicaba</td><td>R$ 0</td><td>—</td><td style="color:#3B6D11">R$ 0</td><td>0</td></tr>
+          </tbody>
+        </table>
       </div>
-    </div>
-    <div class="page" id="page-item-detalhe">
-      <div class="page-header">
-        <button class="btn btn-sm" onclick="showPage('catalogo')" style="margin-bottom:10px">Voltar</button>
-        <div class="page-title">Alicate crimpador</div>
-      </div>
-    </div>
-    <div class="page" id="page-tecnico-itens">
-      <div class="page-header">
-        <button class="btn btn-sm" onclick="showPage('tecnicos')" style="margin-bottom:10px">Voltar</button>
-        <div class="page-title">C. Oliveira - Campinas</div>
+      <div class="card">
+        <div class="card-title">Histórico de custódia — Alicate crimpador (FRR-001 · QR-1042)</div>
+        <div class="timeline">
+          <div class="timeline-item active">
+            <strong style="font-size:13px;color:#1a1a18">C. Oliveira — Campinas</strong>
+            <span style="color:#888780">Recebeu em 10/01/2024 · Em uso · 1 solicitação aberta</span>
+          </div>
+          <div class="timeline-item done">
+            <strong style="font-size:13px;color:#1a1a18">T. Rocha</strong>
+            <span style="color:#888780">Recebeu em 05/08/2023 · Devolveu em 09/01/2024 · Bom estado</span>
+          </div>
+          <div class="timeline-item done">
+            <strong style="font-size:13px;color:#1a1a18">Estoque central</strong>
+            <span style="color:#888780">Entrada em 01/08/2023 · NF de compra 4821</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -436,6 +765,14 @@ function showPage(id) {
 function switchTab(el, tabId) {
   el.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
+}
+function updateMotivos(sel) {
+  const motivo = document.getElementById('sel-motivo');
+  if (sel.value === 'EPI') {
+    motivo.innerHTML = '<option>EPI vencido<\/option><option>Perdido<\/option><option>Quebrado<\/option><option>Item faltante<\/option>';
+  } else {
+    motivo.innerHTML = '<option>Perdido<\/option><option>Quebrado<\/option><option>Desgaste<\/option><option>Item faltante<\/option>';
+  }
 }
 </script>
 </body>
